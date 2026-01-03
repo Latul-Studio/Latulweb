@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Nunito Sans Variable */
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('/fonts/NunitoSans-Variable.ttf') format('truetype');
+  font-weight: 200 1000;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('/fonts/NunitoSans-Italic-Variable.ttf') format('truetype');
+  font-weight: 200 1000;
+  font-style: italic;
+}

@@ -1,0 +1,279 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- TYPOGRAPHY SYSTEM: GOOGLE SANS LOCAL (.ttf) --- */
+
+/* Weight: 400 (Regular) */
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/static/GoogleSans-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/static/GoogleSans-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Weight: 500 (Medium) */
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/static/GoogleSans-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/static/GoogleSans-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Weight: 600 (SemiBold) */
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/static/GoogleSans-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/static/GoogleSans-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Weight: 700 (Bold) */
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/static/GoogleSans-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Google Sans';
+  src: url('./assets/fonts/Google_Sans/static/GoogleSans-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    /* --- PALETA CLEAN LIGHT MODE (Retorno_Clean_Light_Mode.md) --- */
+
+    /* Re-mapping "Dark" vars to Light as requested/required by prompt logic */
+    --surface-dark: #FFFFFF;
+    /* Base Background (White) */
+    --surface-panel: #F3F4F6;
+    /* Subtle Gray Cards */
+    --surface-glass: rgba(255, 255, 255, 0.6);
+    /* White Frost */
+
+    /* Semantic Text Colors */
+    --text-primary: #111827;
+    /* Almost Black */
+    --text-secondary: #4B5563;
+    /* Mid Gray */
+
+    /* Accents */
+    --accent-primary: #000000;
+    /* Strong Black Buttons */
+    --accent-secondary: #E5E7EB;
+    /* Borders */
+
+    --cyan-neon: #60A5FA;
+    /* Soft Cyan/Blue for Light Mode */
+    --violet-neon: #A78BFA;
+    /* Soft Violet */
+
+    /* Tokens for compatibility */
+    --surface-light: #ffffff;
+    --on-surface-light: #111827;
+
+    --surface-dark-dim: #F9FAFB;
+    /* Very light gray for alternate sections */
+    --on-surface-dark: #111827;
+    /* Inverting text color for "dark" vars */
+
+    /* --- DIMENSIONES FLUIDAS (VW Scaling) --- */
+    --shape-corner-xs: 0.2vw;
+    --shape-corner-sm: 0.4vw;
+    --shape-corner-md: 0.6vw;
+    --shape-corner-lg: 0.8vw;
+    --shape-corner-full: 100vw;
+    /* Pill shape */
+
+    --spacing-xs: 0.25vw;
+    --spacing-sm: 0.5vw;
+    --spacing-md: 1vw;
+    --spacing-lg: 2vw;
+    --spacing-xl: 4vw;
+
+    /* Glass Borders */
+    --glass-border-light: rgba(0, 0, 0, 0.05);
+    --glass-border-dark: rgba(0, 0, 0, 0.05);
+    /* Light borders even for "dark" class */
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  body {
+    /* ACTUALIZACIÓN: Usar Google Sans por defecto */
+    font-family: 'Google Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--surface-dark);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.01em;
+    /* Ajuste óptico para Google Sans */
+  }
+}
+
+@layer utilities {
+
+  /* Backgrounds */
+  .bg-tech-dark {
+    background-color: var(--surface-dark);
+    color: var(--text-primary);
+  }
+
+  .bg-tech-panel {
+    background-color: var(--surface-panel);
+  }
+
+  /* Glassmorphism Light */
+  .glass-panel {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: var(--surface-glass);
+    border: 1px solid var(--accent-secondary);
+  }
+
+  .glass-dark {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid var(--accent-secondary);
+    color: var(--text-primary);
+  }
+
+  /* Typography Utilities */
+  .text-primary {
+    color: var(--text-primary);
+  }
+
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+
+  /* Interactive Elements (Pill Buttons) */
+  .btn-pill {
+    border-radius: var(--shape-corner-sm);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .btn-pill:hover {
+    border-radius: var(--shape-corner-full);
+  }
+
+  /* Hover Accents */
+  .hover-cyan:hover {
+    border-color: var(--cyan-neon);
+    color: var(--cyan-neon);
+    box-shadow: 0 4px 20px rgba(96, 165, 250, 0.15);
+  }
+
+  .hover-violet:hover {
+    border-color: var(--violet-neon);
+    color: var(--violet-neon);
+    box-shadow: 0 4px 20px rgba(167, 139, 250, 0.15);
+  }
+
+  /* Animaciones */
+  .fade-up-enter {
+    opacity: 0;
+    transform: translateY(1.5vw);
+  }
+
+  .fade-up-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 500ms, transform 500ms;
+  }
+
+  @keyframes float-tech {
+    0% {
+      transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+      transform: translateY(-20px) rotate(2deg);
+    }
+
+    100% {
+      transform: translateY(0px) rotate(0deg);
+    }
+  }
+
+  .animate-float-slow {
+    animation: float-tech 6s ease-in-out infinite;
+  }
+
+  .animate-float-medium {
+    animation: float-tech 5s ease-in-out infinite;
+  }
+
+  .animate-float-fast {
+    animation: float-tech 4s ease-in-out infinite;
+  }
+}
+
+/* Scrollbar Light */
+::-webkit-scrollbar {
+  width: 0.4vw;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E5E7EB;
+  border-radius: 0.2vw;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9CA3AF;
+}
