@@ -1,0 +1,1 @@
+import{j as e}from"./index-C3vVwrnb.js";const r=({title:s,children:n})=>e.jsxs("div",{className:"pt-24 min-h-screen container mx-auto px-6",children:[e.jsx("h1",{className:"text-4xl font-bold mb-4",children:s}),e.jsx("p",{className:"text-gray-600 mb-8",children:"Contenido en construcción..."}),n]});export{r as P};
