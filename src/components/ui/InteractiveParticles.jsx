@@ -11,7 +11,7 @@ const InteractiveParticles = ({ morph = true }) => {
         let animationFrameId;
 
         // Configuración
-        const PARTICLE_COUNT = 2200; // Incrementado para la Phi que es más compleja
+        let particleCount = 2200; // Will be adjusted in init based on screen size
         const TEXT_SIZE_RATIO = 0.8; // "Más grande" (80% del alto)
         const EASE_FACTOR = 0.02;
         const MOUSE_RADIUS = 100;
@@ -61,7 +61,7 @@ const InteractiveParticles = ({ morph = true }) => {
 
                 this.vx = (Math.random() - 0.5) * 0.5;
                 this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 1.5 + 0.5;
+                this.size = Math.random() * 0.8 + 0.2;
 
                 this.targetX = null;
                 this.targetY = null;
@@ -102,7 +102,7 @@ const InteractiveParticles = ({ morph = true }) => {
             }
 
             draw(ctx) {
-                ctx.fillStyle = 'rgba(17, 24, 39, 0.6)';
+                ctx.fillStyle = '#000000';
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
                 ctx.fill();
@@ -124,8 +124,11 @@ const InteractiveParticles = ({ morph = true }) => {
                 }
             }
 
+            // Adjust particle count for mobile
+            particleCount = width < 768 ? 800 : 2200;
+
             particles = [];
-            for (let i = 0; i < PARTICLE_COUNT; i++) {
+            for (let i = 0; i < particleCount; i++) {
                 const p = new Particle(width, height);
                 if (morph && i < targets.length) {
                     p.targetX = targets[i].x;
@@ -172,7 +175,7 @@ const InteractiveParticles = ({ morph = true }) => {
     return (
         <canvas
             ref={canvasRef}
-            className="absolute inset-0 z-0 pointer-events-auto opacity-50 mix-blend-multiply"
+            className="absolute inset-0 z-0 pointer-events-auto"
             style={{ width: '100%', height: '100%' }}
         />
     );

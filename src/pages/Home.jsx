@@ -126,59 +126,106 @@ const Reveal = ({ children, delay = 0 }) => (
 
 /* --- COMPONENTES DE SECCIÓN (ESTÉTICA CLEAN TECH) --- */
 
-const HeroSection = ({ mountRef }) => (
-    <section className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden">
-        {/* Background Stripes (Restored) */}
-        <div className="absolute inset-0 -z-20 pointer-events-none opacity-50 bg-[linear-gradient(0deg,transparent_24vh,#f5f5f7_24vh,#f5f5f7_25vh)] bg-[length:100%_25vh]" />
-        <div ref={mountRef} className="absolute inset-0 z-0 pointer-events-none opacity-90 scale-100 md:scale-110" />
+const HeroSection = ({ mountRef }) => {
+    // Variantes para la animación de entrada
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.3,
+                delayChildren: 0.2,
+                duration: 0.8
+            }
+        }
+    };
 
-        <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 h-full items-center">
+    const itemVariants = {
+        hidden: { opacity: 0, y: 30, scale: 0.95 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+        }
+    };
 
-            {/* Left: Mission (Glass Box) */}
-            <div className="hidden md:block md:col-span-3 pr-8 self-center animate-in slide-in-from-left duration-1000 delay-300">
-                <div className="text-right bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-[0_0_30px_rgba(80,198,208,0.3)] cursor-default">
-                    <h4 className="text-[18px] font-medium leading-[29px] text-black mb-2">Nuestra Base</h4>
-                    <p className="text-[18px] font-normal leading-[29px] text-gray-600">
-                        La excelencia no es una meta.<br /> Es nuestro estándar mínimo.
-                    </p>
-                    <div className="h-px w-12 bg-gray-300 ml-auto mt-4" />
-                </div>
-            </div>
+    const sideItemVariants = (direction) => ({
+        hidden: { opacity: 0, x: direction === 'left' ? -50 : 50 },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: { duration: 1, ease: [0.22, 1, 0.36, 1] }
+        }
+    });
 
-            {/* Center: Title */}
-            <div className="col-span-1 md:col-span-6 text-center flex flex-col items-center justify-center pointer-events-auto">
-                <div className="inline-block px-4 py-2 mb-6 rounded-full border border-gray-200 bg-white/60 backdrop-blur-md">
-                    <h1 className="text-xs md:text-sm font-bold tracking-[0.3em] text-[#0f97bd] uppercase">
-                        Socio Tecnológico Integral
-                    </h1>
-                </div>
+    return (
+        <section className="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden">
+            {/* Background Stripes (Restored) */}
+            <div className="absolute inset-0 -z-20 pointer-events-none opacity-50 bg-[linear-gradient(0deg,transparent_24vh,#f5f5f7_24vh,#f5f5f7_25vh)] bg-[length:100%_25vh]" />
 
-                <h2 className="text-5xl md:text-8xl font-[550] tracking-wide text-black mb-8 leading-[0.9] drop-shadow-sm">
-                    CONSTRUIMOS <br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-400">LO CASI</span> <br />
-                    IMPOSIBLE
-                </h2>
+            {/* 3D Scene Fade In */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.9 }} // Original opacity-90
+                transition={{ duration: 1.5, ease: "easeOut" }}
+                ref={mountRef}
+                className="absolute inset-0 z-0 pointer-events-none scale-100 md:scale-110"
+            />
 
-                <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                    <Link to="/contacto" className="px-8 py-4 bg-black text-white rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#0f97bd] transition-colors shadow-xl">
-                        Hablemos de Negocios
-                    </Link>
-                </div>
-            </div>
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                className="container mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 h-full items-center"
+            >
 
-            {/* Right: Vision (Glass Box) */}
-            <div className="hidden md:block md:col-span-3 pl-8 self-center animate-in slide-in-from-right duration-1000 delay-300">
-                <div className="text-left bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-[0_0_30px_rgba(80,198,208,0.3)] cursor-default">
-                    <h4 className="text-[18px] font-medium leading-[29px] text-black mb-2">Visión</h4>
-                    <p className="text-[18px] font-normal leading-[29px] text-gray-600">
-                        Paz mental operativa.<br /> Control real del negocio.
-                    </p>
-                    <div className="h-px w-12 bg-gray-300 mr-auto mt-4" />
-                </div>
-            </div>
-        </div>
-    </section>
-);
+                {/* Left: Mission (Glass Box) */}
+                <motion.div variants={sideItemVariants('left')} className="order-2 md:order-1 col-span-1 md:col-span-3 pr-0 md:pr-8 self-center mt-8 md:mt-0">
+                    <div className="text-left md:text-right bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-[0_0_30px_rgba(80,198,208,0.3)] cursor-default">
+                        <h4 className="text-[18px] font-medium leading-[29px] text-black mb-2">Nuestra Base</h4>
+                        <p className="text-[18px] font-normal leading-[29px] text-gray-600">
+                            La excelencia no es una meta.<br /> Es nuestro estándar mínimo.
+                        </p>
+                        <div className="h-px w-12 bg-gray-300 mr-auto md:ml-auto md:mr-0 mt-4" />
+                    </div>
+                </motion.div>
+
+                {/* Center: Title */}
+                <motion.div variants={itemVariants} className="order-1 md:order-2 col-span-1 md:col-span-6 text-center flex flex-col items-center justify-center pointer-events-auto">
+                    <div className="inline-block px-4 py-2 mb-6 rounded-full border border-gray-200 bg-white/60 backdrop-blur-md">
+                        <h1 className="text-xs md:text-sm font-bold tracking-[0.3em] text-[#0f97bd] uppercase">
+                            Socio Tecnológico Integral
+                        </h1>
+                    </div>
+
+                    <h2 className="text-4xl md:text-8xl font-[550] tracking-wide text-black mb-8 leading-[1.1] md:leading-[0.9] drop-shadow-sm">
+                        CONSTRUIMOS <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-gray-800 to-gray-400">LO CASI</span> <br />
+                        IMPOSIBLE
+                    </h2>
+
+                    <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                        <Link to="/contacto" className="px-8 py-4 bg-black text-white rounded-full font-bold text-xs uppercase tracking-widest hover:bg-[#0f97bd] transition-colors shadow-xl w-full sm:w-auto">
+                            Hablemos de Negocios
+                        </Link>
+                    </div>
+                </motion.div>
+
+                {/* Right: Vision (Glass Box) */}
+                <motion.div variants={sideItemVariants('right')} className="order-3 md:order-3 col-span-1 md:col-span-3 pl-0 md:pl-8 self-center mt-4 md:mt-0">
+                    <div className="text-left bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 transition-all duration-300 hover:bg-white/30 hover:scale-105 hover:shadow-[0_0_30px_rgba(80,198,208,0.3)] cursor-default">
+                        <h4 className="text-[18px] font-medium leading-[29px] text-black mb-2">Visión</h4>
+                        <p className="text-[18px] font-normal leading-[29px] text-gray-600">
+                            Paz mental operativa.<br /> Control real del negocio.
+                        </p>
+                        <div className="h-px w-12 bg-gray-300 mr-auto mt-4" />
+                    </div>
+                </motion.div>
+            </motion.div>
+        </section>
+    );
+};
 
 /* --- TYPEWRITER SPECIALIZED COMPONENT --- */
 const QuoteTyper = () => {
@@ -432,7 +479,7 @@ const ContactCTA = () => (
 
             <ScrollRevealText
                 className="mb-12"
-                lineClassName="text-[120px] leading-[0.95] font-[550] text-black tracking-tight"
+                lineClassName="text-6xl md:text-[120px] leading-[0.95] font-[550] text-black tracking-tight"
             >
                 {["Si lo bueno ya no es suficiente,", "estás en el lugar indicado."]}
             </ScrollRevealText>
